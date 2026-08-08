@@ -1,0 +1,74 @@
+<!-- public/games/space-shooter/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Shooter Stub</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, sans-serif;
+            background: linear-gradient(135deg, #1e1b4b, #311042);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        button {
+            background: #a855f7;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 4px 14px rgba(168, 85, 247, 0.4);
+            transition: transform 0.1s;
+        }
+        button:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+
+    <h1>🚀 Space Shooter Game Stub</h1>
+    <p>Simulate data transmissions back to the Family Hub container</p>
+    
+    <div>
+        <button onclick="sendScore()">Simulate High Score Game Over</button>
+        <button onclick="sendLevelUp()">Simulate Level Unlocked</button>
+    </div>
+
+    <script>
+        // Central function to communicate across the iFrame border
+        function emitToHub(actionName, dataPayload) {
+            window.parent.postMessage({
+                type: 'HUB_STATE_UPDATE',
+                action: actionName,
+                payload: dataPayload
+            }, window.location.origin); // Enforces secure communication with our specific hub domain
+        }
+
+        function sendScore() {
+            emitToHub('GAME_OVER_SCORE', {
+                score: Math.floor(Math.random() * 5000) + 500,
+                player: 'Alex',
+                accuracyPercentage: 88
+            });
+        }
+
+        function sendLevelUp() {
+            emitToHub('ACHIEVEMENT_UNLOCKED', {
+                badgeId: 'galaxy_hero_level_5',
+                unlockedAt: new Date().toISOString()
+            });
+        }
+    </script>
+</body>
+</html>
