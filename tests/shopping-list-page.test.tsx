@@ -117,10 +117,3 @@ describe('PersonalShoppingList', () => {
     expect(screen.queryByText(/test item/i)).not.toBeInTheDocument();
   });
 });
-
-      expect(deleteInMock).toHaveBeenCalledWith(['item-1']);
-    });
-
-    expect(screen.queryByText(/test item/i)).not.toBeInTheDocument();
-  });
-});
